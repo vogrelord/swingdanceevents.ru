@@ -1,16 +1,121 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-  <head>
-    <title>Russian swing events calendar</title>
-    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
-	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
-	<link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
-  </head>
-  <body>
-    <iframe src="https://www.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=5uo1teicmatasqud91oku3710c%40group.calendar.google.com&amp;color=%235229A3&amp;src=7url9f0d98lr2co9o02i53scbs%40group.calendar.google.com&amp;color=%23B1440E&amp;ctz=Europe%2FMoscow" style=" border:solid 1px #777 " width="800" height="600" frameborder="0" scrolling="no"></iframe> 
-    <p>Want to be admin? send email to <a href='mailto:mail@vogre.ru'>mail@vogre.ru</a></p>
-	<!-- Bootstrap and jQuery -->
-	<script src="/script/jquery.min.js"></script>
-	<!-- uncomment if need script src="/script/bootstrap.min.js"></script> -->
-  </body>
+<head>
+    <meta charset='utf-8' />
+    <link href="stylesheets/style.css" rel="stylesheet" />
+    <link href='stylesheets/fullcalendar.min.css' rel='stylesheet' />
+    <link href='stylesheets/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link href="stylesheets/bw-theme.css" rel="stylesheet" />
+    <script src='script/moment.min.js'></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src='script/fullcalendar.min.js'></script>
+    <script src='script/fullcalendar.ru.js'></script>
+    <script src='script/gcal.js'></script>
+    <script src="script/bootstrap.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#calendar').fullCalendar({
+                lang: "ru",
+
+                googleCalendarApiKey: 'AIzaSyDvpgbAwUHo68SmeK-q9fvt9X69lJaFrhQ',
+
+                // Source calendars
+                eventSources: [
+                {
+                    googleCalendarId: '5uo1teicmatasqud91oku3710c@group.calendar.google.com'
+                },
+                {
+                    googleCalendarId: '7url9f0d98lr2co9o02i53scbs@group.calendar.google.com',
+                    className: 'nice-event'
+                }
+                ],
+
+                eventClick: function (event) {
+                    // opens events in a new tab
+                    window.open(event.url, '_blank');
+                    return false;
+                },
+
+                loading: function (bool) {
+                    $('#loading').toggle(bool);
+                }
+
+            });
+
+        });
+
+    </script>
+    <style>
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header id="site-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                    <div class="logo">
+                        <h1><b>RU</b> Swing Dance Events</h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class=" col-lg-3 col-md-4 col-sm-5 col-xs-0">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="cl-effect-11"><a href="#add" data-hover="Добавить">Добавить</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </nav>
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+    </div>
+
+
+    <div class="container">
+        <div class="row page">
+            <div class="col-lg-10 col-md-11">
+                <div id='loading'>loading...</div>
+
+                <div id='calendar'></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-md-11">
+                <header class="entry-header">
+                    <h1 class="entry-title">
+                        <a name="add"></a>Добавить событие.
+                    </h1>
+                </header>
+
+                <ol>
+                    <li>Заведите аккаунт в гугле, если еще не.</li>
+                    <li><a href="mailto:mail@vogre.ru">Попросите</a> добавить вас в админы календаря.</li>
+                    <li><a href="https://www.google.com/calendar/render?cid=5uo1teicmatasqud91oku3710c%40group.calendar.google.com&cid=7url9f0d98lr2co9o02i53scbs%40group.calendar.google.com#main_7" target="_blank">Откройте календарь по ссылке</a> и добавляйте события.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <footer id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright">&copy; 2015 unnamed</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
 </html>
