@@ -7,15 +7,49 @@
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
     <link href="stylesheets/bw-theme.css" rel="stylesheet" />
     <link href="stylesheets/style.css" rel="stylesheet" />
-	<script src='script/moment.min.js'></script>
+    <script src='script/moment.min.js'></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src='script/fullcalendar.min.js'></script>
     <script src='script/fullcalendar.ru.js'></script>
     <script src='script/gcal.js'></script>
     <script src="script/bootstrap.min.js"></script>
+    <!--<script src="script/popover.js"></script>-->
 
     <script>
+        moment.locale('ru');
+        //anchor jumping 
+        function jump(h) {
+            var top = document.getElementById(h).offsetTop; //Getting Y of target element
+            window.scrollTo(0, top);                        //Go there.
+        };
+        function hideEventDetails()
+        {
+            // opens events in a new tab
+            $('#eventdetails').collapse('hide');
+            $('#addevent').collapse('show');
+            jump('site-footer');
+        }
+        function linkify(inputText) {
+            var replacedText, replacePattern1, replacePattern2, replacePattern3;
 
+            //URLs starting with http://, https://, or ftp://
+            replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+            replacedText = inputText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+            //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+            replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+            replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+            //Change email addresses to mailto:: links.
+            replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+            replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+            return replacedText;
+        }
+    </script>
+    <script>
+
+        // Setup calendar
         $(document).ready(function () {
 
             $('#calendar').fullCalendar({
@@ -35,9 +69,18 @@
                 ],
 
                 eventClick: function (event) {
-                    // opens events in a new tab
-                    window.open(event.url, '_blank');
-                    return false;
+                    var eventdates = event.start.format('LL');
+                    var eventdateend = event.end.format('LL');
+                    if (eventdates != eventdateend)
+                        eventdates = eventdates + " - " + eventdateend;
+                    $('#addevent').collapse('hide');
+                    $('#event-title').text(event.title);
+                    $('#event-description').html(linkify(event.description));
+                    $('#event-dates').text(eventdates);
+                    $('#event-url').attr('href', event.url);
+                    $('#eventdetails').collapse('show');
+
+                    jump('site-footer'); return false;
                 },
 
                 loading: function (bool) {
@@ -46,11 +89,27 @@
 
             });
 
+            // Enabling Popover (hidden content and title capturing)
+            $("[data-toggle=popover]").popover({
+                html: true,
+                content: function () {
+                    return $('#addEventBody').html();
+                },
+                title: function () {
+                    return $('#addEventTitle').html();
+                },
+                template: '<div class="popover" role="tooltip" style="width: 500px;"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"><div class="data-content"></div></div></div>'
+            });
+
         });
 
+        // Setup collapse
+
+        $(".collapse").collapse();
+        
+
     </script>
-    <style>
-    </style>
+
 </head>
 <body>
 
@@ -72,7 +131,7 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="cl-effect-11"><a href="#add" data-hover="Добавить">Добавить</a></li>
+                                <li class="cl-effect-11"><a href="#add" data-hover="Добавить" onclick="hideEventDetails();">Добавить</a></li>
                             </ul>
                         </div><!-- /.navbar-collapse -->
                     </nav>
@@ -80,8 +139,6 @@
             </div>
         </header>
     </div>
-
-
     <div class="container">
         <div class="row page">
             <div class="col-lg-10 col-md-11">
@@ -90,19 +147,34 @@
                 <div id='calendar'></div>
             </div>
         </div>
-        <div class="row">
+        <div class="row collapse page" id="addevent">
             <div class="col-lg-10 col-md-11">
                 <header class="entry-header">
-                    <h1 class="entry-title">
+                    <h2 id="addEventTitle" class="entry-title">
                         <a name="add"></a>Добавить событие.
-                    </h1>
+                    </h2>
                 </header>
-
-                <ol>
-                    <li>Заведите аккаунт в гугле, если еще не.</li>
-                    <li><a href="mailto:mail@vogre.ru">Попросите</a> добавить вас в админы календаря.</li>
-                    <li><a href="https://www.google.com/calendar/render?cid=5uo1teicmatasqud91oku3710c%40group.calendar.google.com&cid=7url9f0d98lr2co9o02i53scbs%40group.calendar.google.com#main_7" target="_blank">Откройте календарь по ссылке</a> и добавляйте события.</li>
-                </ol>
+                <div id="addEventBody">
+                    <ol>
+                        <li>Заведите аккаунт в гугле, если еще не.</li>
+                        <li><a href="mailto:mail@vogre.ru">Попросите</a> добавить вас в админы календаря.</li>
+                        <li><a href="https://www.google.com/calendar/render?cid=5uo1teicmatasqud91oku3710c%40group.calendar.google.com&cid=7url9f0d98lr2co9o02i53scbs%40group.calendar.google.com#main_7" target="_blank">Откройте календарь по ссылке</a> и добавляйте события.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="row collapse top-buffer" id="eventdetails">
+            <div class="col-lg-10 col-md-11">
+                <header class="entry-header">
+                    <h2 class="entry-title"><div id="event-title"></div><div id="event-dates"></div>
+                    </h2>
+                </header>
+                <div>
+                    <ul style="list-style:square">
+                        <li id="event-description"></li>
+                        <li><a href="#" target="_blank" id="event-url">Открыть в календаре</a> и добавляйте события.</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -110,7 +182,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="copyright">&copy; 2015 unnamed</p>
+                    <p class="copyright">&copy; 2015 Vogre &amp; Co</p>
                 </div>
             </div>
         </div>

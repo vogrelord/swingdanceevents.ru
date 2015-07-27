@@ -22,3 +22,7 @@ body {
     background-color: #4cae4c;
     border: 1px solid #4cae4c;
 }
+
+    .popover{
+        max-width:600px;
+    }
