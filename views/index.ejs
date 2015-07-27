@@ -67,6 +67,7 @@
                 ],
 
                 eventClick: function (event) {
+                    var eventlocation = event.location;
                     var eventdates = event.start.format('LL');
                     var eventdateend = event.end.format('LL');
                     if (eventdates != eventdateend)
@@ -76,6 +77,14 @@
                     $('#event-description').html(linkify(event.description));
                     $('#event-dates').text(eventdates);
                     $('#event-url').attr('href', event.url);
+                    if (event.location) {
+                        $('#event-location-text').text(event.location);
+                        $('#event-location').show();
+                    }
+                    else {
+                        $('#event-location-text').text('');
+                        $('#event-location').hide();
+                    }
 
 
                     var disqus_identifier = event.id;
@@ -181,11 +190,13 @@
             <div class="col-lg-10 col-md-11">
                 <header class="entry-header">
                     <h2 class="entry-title">
-                        <div id="event-title"></div><div id="event-dates"></div>
+                        <div id="event-title"></div>
+                        <div id="event-dates"></div>
                     </h2>
                 </header>
                 <div>
                     <ul style="list-style:square">
+                        <li id="event-location"><span id="event-location-text"></li>
                         <li id="event-description"></li>
                         <li><a href="#" target="_blank" id="event-url">Открыть в календаре</a></li>
                     </ul>
