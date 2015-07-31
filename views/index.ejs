@@ -16,6 +16,12 @@
 
     <script>
         moment.locale('ru');
+		header: {
+                    right: 'prev,next today',
+                    center: 'title',
+                    left: 'month,agendaWeek'
+                },
+
         //anchor jumping
         function jump(h) {
             var top = document.getElementById(h).offsetTop; //Getting Y of target element
