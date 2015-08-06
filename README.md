@@ -11,5 +11,5 @@ If you want to contribute this is great!
  - Write issues/feature request. You can do it in the issues tab. Please do not forget to close the issue when they are done.
  - If you want to fix an issue or add an enhancement - Fork / pull request.
 
- # Licensing. 
- Under MIT license.
+# Licensing. 
+Under MIT license.
