@@ -52,7 +52,11 @@
 
             $('#calendar').fullCalendar({
                 lang: "ru",
-
+                header: {
+                    right: 'prev,next today',
+                    center: 'title',
+                    left: 'month,agendaWeek'
+                },
                 googleCalendarApiKey: 'AIzaSyDvpgbAwUHo68SmeK-q9fvt9X69lJaFrhQ',
 
                 // Source calendars
@@ -74,7 +78,14 @@
                         eventdates = eventdates + " - " + eventdateend;
                     $('#addevent').collapse('hide');
                     $('#event-title').text(event.title);
-                    $('#event-description').html(linkify(event.description));
+                    if (event.description) {
+                        $('#event-description').html(linkify(event.description));
+                        $('#event-description').show();
+                    }
+                    else
+                    {
+                        $('#event-description').hide();
+                    }
                     $('#event-dates').text(eventdates);
                     $('#event-url').attr('href', event.url);
                     if (event.location) {
@@ -165,7 +176,7 @@
     <div class="container">
         <div class="row page">
             <div class="col-lg-10 col-md-11">
-                <div id='loading'>loading...</div>
+                <!--<div id='loading'>loading...</div>-->
 
                 <div id='calendar'></div>
             </div>
