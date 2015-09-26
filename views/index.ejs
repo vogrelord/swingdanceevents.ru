@@ -2,17 +2,17 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <link href='stylesheets/fullcalendar.min.css' rel='stylesheet' />
-    <link href='stylesheets/fullcalendar.print.css' rel='stylesheet' media='print' />
-    <link href="stylesheets/bootstrap.min.css" rel="stylesheet" />
-    <link href="stylesheets/bw-theme.css" rel="stylesheet" />
-    <link href="stylesheets/style.css" rel="stylesheet" />
-    <script src='script/moment.min.js'></script>
+    <link href='/stylesheets/fullcalendar.min.css' rel='stylesheet' />
+    <link href='/stylesheets/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link href="/stylesheets/bw-theme.css" rel="stylesheet" />
+    <link href="/stylesheets/style.css" rel="stylesheet" />
+    <script src='/script/moment.min.js'></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src='script/fullcalendar.min.js'></script>
-    <script src='script/fullcalendar.ru.js'></script>
-    <script src='script/gcal.js'></script>
-    <script src="script/bootstrap.min.js"></script>
+    <script src='/script/fullcalendar.min.js'></script>
+    <script src='/script/fullcalendar.ru.js'></script>
+    <script src='/script/gcal.js'></script>
+    <script src="/script/bootstrap.min.js"></script>
 
     <script>
         moment.locale('ru');
@@ -46,7 +46,7 @@
         }
     </script>
     <script>
-
+        var calendar = <%-JSON.stringify(calendar)%>;
         // Setup calendar
         $(document).ready(function () {
 
@@ -60,15 +60,7 @@
                 googleCalendarApiKey: 'AIzaSyDvpgbAwUHo68SmeK-q9fvt9X69lJaFrhQ',
 
                 // Source calendars
-                eventSources: [
-                {
-                    googleCalendarId: '5uo1teicmatasqud91oku3710c@group.calendar.google.com'
-                },
-                {
-                    googleCalendarId: '7url9f0d98lr2co9o02i53scbs@group.calendar.google.com',
-                    className: 'world-event'
-                }
-                ],
+                eventSources: calendar.calendars,
 
                 eventClick: function (event) {
                     var eventlocation = event.location;
@@ -175,10 +167,20 @@
     </div>
     <div class="container">
         <div class="row page">
-            <div class="col-lg-10 col-md-11">
+            <div class="col-lg-9 col-md-9">
                 <!--<div id='loading'>loading...</div>-->
 
                 <div id='calendar'></div>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <ul id='calendar-list'>
+                    <li>
+                        <a href='/'>Вся россия и мир</a>
+                    </li>
+                    <li>
+                        <a href='/calendar/moscow'>Москва</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row collapse page" id="addevent">
