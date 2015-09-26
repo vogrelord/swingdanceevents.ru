@@ -7,7 +7,7 @@ var calendars = require('../calendars');
 router.get('/:calendar_id', function(req, res, next) {
   var calendar_id = req.params.calendar_id;
   var calendar = calendars[calendar_id] || calendars['default'];
-  res.render('index', { title: 'Express' , calendar: calendar});
+  res.render('index', {route: calendar_id||'default',  title: 'Express' , calendar: calendar});
 });
 
 module.exports = router;

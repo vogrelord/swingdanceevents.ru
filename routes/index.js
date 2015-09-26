@@ -4,7 +4,7 @@ var calendar = require('../calendars')['default'];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', calendar: calendar });
+  res.render('index', {route:'default', title: 'Express', calendar: calendar });
 });
 
 module.exports = router;

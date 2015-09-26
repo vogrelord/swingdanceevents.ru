@@ -144,7 +144,7 @@
             <div class="row">
                 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
                     <div class="logo">
-                        <h1><b>RU</b> Swing Dance Events</h1>
+                        <h1><a href='/'><b>RU</b> Swing Dance Events</a></h1>
                     </div>
                 </div><!-- col-md-4 -->
                 <div class=" col-lg-3 col-md-4 col-sm-5 col-xs-0">
@@ -173,11 +173,11 @@
                 <div id='calendar'></div>
             </div>
             <div class="col-lg-3 col-md-3">
-                <ul id='calendar-list'>
-                    <li>
+                <ul id='calendar-list' class='nav nav-pills nav-stacked'>
+                    <li class='<%=route=='default' ? 'active' : ''%>'>
                         <a href='/'>Вся россия и мир</a>
                     </li>
-                    <li>
+                    <li class='<%=route=='moscow' ? 'active' : ''%>'>
                         <a href='/calendar/moscow'>Москва</a>
                     </li>
                 </ul>
@@ -195,6 +195,23 @@
                         <li>Заведите аккаунт в гугле, если еще не.</li>
                         <li><a href="mailto:mail@vogre.ru">Попросите</a> добавить вас в админы календаря.</li>
                         <li><a href="https://www.google.com/calendar/render?cid=5uo1teicmatasqud91oku3710c%40group.calendar.google.com&cid=7url9f0d98lr2co9o02i53scbs%40group.calendar.google.com#main_7" target="_blank">Откройте календарь по ссылке</a> и добавляйте события.</li>
+                    </ol>
+                </div>
+                <header class="entry-header">
+                    <h2 id="addEventTitle" class="entry-title">
+                        <a name="add"></a>Добавить календарь.
+                    </h2>
+                </header>
+                <div id="addEventBody">
+                    <ol>
+                        <li>Создайте календарь на <a href='http://calendar.google.com'>calendar.google.com</a>.</li>
+                        <li>Откройте общий доступ к календарю, как показано на картинке: 
+                        <div><img style='margin: 10px 0; padding: 10px; border: solid 1px #ccc' src="/images/share-man.png"/></div>
+                        </li>
+                        <li>
+                            <a href="mailto:mail@vogre.ru">Перешлите нам</a> код для вставки календаря.    
+                            <div><img style='margin: 10px 0; padding: 10px; border: solid 1px #ccc' src="/images/share-man-2.png"/></div>
+                        </li>
                     </ol>
                 </div>
             </div>
