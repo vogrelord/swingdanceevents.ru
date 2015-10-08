@@ -21,6 +21,15 @@ module.exports = {
         ]
     },
     
+    'spb': {
+        title: 'Санкт-Петербург',
+        calendars: [
+            {
+                googleCalendarId: 'f8s9dg1as83k3oprq81o4mjqgk@group.calendar.google.com'
+            }
+        ]
+    },
+    
     'nino': {
         title: 'Нижний Новгород',
         calendars: [
@@ -30,14 +39,7 @@ module.exports = {
         ]
     },
     
-     'spb': {
-        title: 'Санкт-Петербург',
-        calendars: [
-            {
-                googleCalendarId: 'f8s9dg1as83k3oprq81o4mjqgk@group.calendar.google.com'
-            }
-        ]
-    },
+    
     
     'tula': {
         title: 'Тула',
