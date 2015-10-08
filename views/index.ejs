@@ -174,12 +174,13 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <ul id='calendar-list' class='nav nav-pills nav-stacked'>
-                    <li class='<%=route=='default' ? 'active' : ''%>'>
-                        <a href='/'>Вся россия и мир</a>
-                    </li>
-                    <li class='<%=route=='moscow' ? 'active' : ''%>'>
-                        <a href='/calendar/moscow'>Москва</a>
-                    </li>
+                    <% for(var c in calendars) { 
+                        var cal = calendars[c];
+                        %>
+                        <li class='<%=route==c ? 'active' : ''%>'>
+                            <a href='/calendar/<%=c%>'><%=cal.title%></a>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
