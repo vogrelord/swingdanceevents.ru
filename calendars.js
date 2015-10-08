@@ -66,4 +66,14 @@ module.exports = {
         ]
     },
     
+    'ekb': {
+        title: 'Екатеринбург',
+        calendars: [
+            {
+                googleCalendarId: '6sq8fa91motgkh8hbjlopmfb98@group.calendar.google.com'
+            }
+        ]
+    },
+    
+    
 }
