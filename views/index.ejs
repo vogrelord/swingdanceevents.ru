@@ -178,7 +178,7 @@
                         var cal = calendars[c];
                         %>
                         <li class='<%=route==c ? 'active' : ''%>'>
-                            <a href='/calendar/<%=c%>'><%=cal.title%></a>
+                            <a href='<%= c=='default'? '/' : ('/calendar/'+c) %>'><%=cal.title%></a>
                         </li>
                     <% } %>
                 </ul>
