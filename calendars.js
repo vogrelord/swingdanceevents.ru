@@ -76,6 +76,15 @@ module.exports = {
             }
         ]
     },
+        
+    'cheboksary': {
+        title: 'Чебоксары',
+        calendars: [
+            {
+                googleCalendarId: 'h6988rpgt328vj77cde9bn68lk@group.calendar.google.com'
+            }
+        ]
+    },
     
     
 }
